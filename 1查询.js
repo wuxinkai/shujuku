@@ -16,7 +16,7 @@ connection.query(sql, function (error, results, fields) {
     if (error){
          console.log(error)
     }else {
-        //console.log(results)
+        console.log(results);
         // console.log(fields)
         results.forEach(function (row) {
             console.log(row.name)
