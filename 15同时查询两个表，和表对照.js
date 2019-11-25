@@ -12,7 +12,8 @@ var pool = mysql.createPool  ({
 // var sql=" select boy.hid, boy.bname, girl.hid ,girl.gname from boy inner join girl on boy.hid = girl.hid";
 
 //left左链接 是把左边的内容都查出来， 对应右表  如果没有找到是null  换成right就是右链接
-var sql=" select boy.hid, boy.bname, girl.hid ,girl.gname from boy left join girl on boy.hid = girl.hid";
+// var sql=" select boy.hid, boy.bname, girl.hid ,girl.gname from boy left join girl on boy.hid = girl.hid";
+var sql=" select articles.title, category.id, from articles left join category on articles.category_id = category.id";
 
 
 pool.query(sql,function (err,rows) {

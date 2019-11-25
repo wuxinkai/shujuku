@@ -24,7 +24,7 @@ show tables;
 3.2 查看表的结构: 
 desc tableName;
 
-3.3 查看表的创建过程:
+3.3 查看表的创建过程: 
 show create table  tableName;
 
 3.4 创建表:
@@ -33,7 +33,7 @@ show create table  tableName;
 ....列2...
 ....
 列名称N　列类型　[列参数]　[not null default ]
-)engine myisam/innodb charset  utf8/gbk
+)engine myisam/innodb charset utf8/gbk
 
 
 3.4的例子:
@@ -292,23 +292,29 @@ parent_id -- 栏目的父id
 
 查出满足以下条件的商品
 1.1:主键为32的商品
-select goods_id,goods_name,shop_price from ecs_goods where goods_id=32;
+select goods_id,goods_name,shop_price 
+     from ecs_goods
+     where goods_id=32;
 1.2:不属第3栏目的所有商品
-select goods_id,cat_id,goods_name,shop_price  from ecs_goods where cat_id!=3;
+select goods_id,cat_id,goods_name,shop_price  from ecs_goods
+     where cat_id!=3;
 
 1.3:本店价格高于3000元的商品
 
- select goods_id,cat_id,goods_name,shop_price  from ecs_goods where shop_price >3000;
+ select goods_id,cat_id,goods_name,shop_price  from ecs_goods
+     where shop_price >3000;
 
 1.4:本店价格低于或等于100元的商品
 select goods_id,cat_id,goods_name,shop_price  from ecs_goods where shop_price <=100;
 
 1.5:取出第4栏目或第11栏目的商品(不许用or)
-select goods_id,cat_id,goods_name,shop_price  from ecs_goods where cat_id in (4,11);
+select goods_id,cat_id,goods_name,shop_price  from ecs_goods
+     where cat_id in (4,11);
 
 
 1.6:取出100<=价格<=500的商品(不许用and)
-select goods_id,cat_id,goods_name,shop_price  from ecs_goods where shop_price between 100 and 500;
+select goods_id,cat_id,goods_name,shop_price  from ecs_goods
+     where shop_price between 100 and 500;
 
 
 1.7:取出不属于第3栏目且不属于第11栏目的商品(and,或not in分别实现)
@@ -324,10 +330,12 @@ select goods_id,cat_id,goods_name,shop_price  from ecs_goods where shop_price>10
 
 
 1.9:取出第3个栏目下面价格<1000或>3000,并且点击量>5的系列商品
-select goods_id,cat_id,goods_name,shop_price,click_count from ecs_goods where cat_id=3 and (shop_price <1000 or shop_price>3000) and click_count>5;
+select goods_id,cat_id,goods_name,shop_price,click_count from ecs_goods where
+cat_id=3 and (shop_price <1000 or shop_price>3000) and click_count>5;
 
 1.10:取出第1个栏目下面的商品(注意:1栏目下面没商品,但其子栏目下有)
-select goods_id,cat_id,goods_name,shop_price,click_count from ecs_goods where cat_id in (2,3,4,5);
+select goods_id,cat_id,goods_name,shop_price,click_count from ecs_goods
+     where cat_id in (2,3,4,5);
 
 1.11:取出名字以"诺基亚"开头的商品
 select goods_id,cat_id,goods_name,shop_price  from ecs_goods     where goods_name like '诺基亚%';
@@ -339,10 +347,12 @@ select goods_id,cat_id,goods_name,shop_price  from ecs_goods
 
 
 1.13:取出名字不以"诺基亚"开头的商品
-select goods_id,cat_id,goods_name,shop_price from ecs_goos where goods_name not like '诺基亚%';
+select goods_id,cat_id,goods_name,shop_price from ecs_goos
+     where goods_name not like '诺基亚%';
 
 1.14:取出第3个栏目下面价格在1000到3000之间,并且点击量>5 "诺基亚"开头的系列商品
-select goods_id,cat_id,goods_name,shop_price  from ecs_goods where cat_id=3 and shop_price>1000 and shop_price <3000 and click_count>5 and goods_name like '诺基亚%';
+select goods_id,cat_id,goods_name,shop_price  from ecs_goods where 
+cat_id=3 and shop_price>1000 and shop_price <3000 and click_count>5 and goods_name like '诺基亚%';
 
 
 select goods_id,cat_id,goods_name,shop_price  from ecs_goods where 
@@ -413,7 +423,8 @@ select cat_id,max(shop_price) from ecs_goods  group by cat_id;
 
 3 having与group综合运用查询:
 3.1:查询该店的商品比市场价所节省的价格
-select goods_id,goods_name,market_price-shop_price as j from ecs_goods ;
+select goods_id,goods_name,market_price-shop_price as j 
+     from ecs_goods ;
 
 
 3.2:查询每个商品所积压的货款(提示:库存*单价)
@@ -572,11 +583,12 @@ select goods_id,goods_name,shop_price from ecs_goods order by shop_price desc;
 4.2:按发布时间由早到晚排序
 select goods_id,goods_name,add_time from ecs_goods order by add_time;
 
-4.3:cat_id接栏目由低到高排序,shop_price栏目内部按价格由高到低排序
-select goods_id,cat_id,goods_name,shop_price from ecs_goods order by cat_id ,shop_price desc;
+4.3:接栏目由低到高排序,栏目内部按价格由高到低排序
+select goods_id,cat_id,goods_name,shop_price from ecs_goods
+     order by cat_id ,shop_price desc;
 
 
-4.4:取出价格(shop_price)最高的前三名商品
+4.4:取出价格最高的前三名商品
 select goods_id,goods_name,shop_price from ecs_goods order by shop_price desc limit 3;
 
 
@@ -586,7 +598,9 @@ select goods_id,goods_name,click_count from ecs_goods order by click_count desc 
 
 5	连接查询
 5.1:取出所有商品的商品名,栏目名,价格
-select goods_name,cat_name,shop_price from ecs_goods left join ecs_category on ecs_goods.cat_id=ecs_category.cat_id;
+select goods_name,cat_name,shop_price from 
+ecs_goods left join ecs_category
+on ecs_goods.cat_id=ecs_category.cat_id;
 
 5.2:取出第4个栏目下的商品的商品名,栏目名,价格
 select goods_name,cat_name,shop_price from 
@@ -765,7 +779,8 @@ mysql> select id,sum(num) from (select * from ta union all select * from tb) as 
 
 7: 子查询:
 7.1:查询出最新一行商品(以商品编号最大为最新,用子查询实现)
-select goods_id,goods_name from ecs_goods where goods_id =(select max(goods_id) from ecs_goods);
+select goods_id,goods_name from 
+     ecs_goods where goods_id =(select max(goods_id) from ecs_goods);
 
 
 7.2:查询出编号为19的商品的栏目名称(用左连接查询和子查询分别)
@@ -773,8 +788,9 @@ select goods_id,goods_name from ecs_goods where goods_id =(select max(goods_id) 
 select goods_id,goods_name,cat_id from ecs_goods where goods_id in (select max(goods_id) from ecs_goods group by cat_id);
 7.4:用from型子查询把ecs_goods表中的每个栏目下面最新的商品取出来
 select * from (select goods_id,cat_id,goods_name from ecs_goods order by goods_id desc) as t group by cat_id;
-7.5 用exists型子查询 这行如果存在就要，不存在就不要    ,查出所有有商品的栏目
-select * from category where exists (select * from goods where goods.cat_id=category.cat_id);
+7.5 用exists型子查询,查出所有有商品的栏目
+select * from category
+where exists (select * from goods where goods.cat_id=category.cat_id);
 
 
 创建触发器:
